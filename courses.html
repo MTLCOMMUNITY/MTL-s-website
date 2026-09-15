@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Courses - MoonTechLife Community</title>
+  <meta name="description" content="Explore MoonTechLife courses: AI WebDev, Product Design, Cybersecurity, Digital Marketing, Web Development, AI Automation, and Video Editing." />
+  <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+</head>
+<body class="bg-[#FAFAFA] text-[#111624]">
+
+  <!-- Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="relative overflow-hidden pt-12 pb-16 md:py-20 bg-hero-topo bg-cover bg-center text-center">
+      
+      <!-- Decorative Shapes (Clean individual vectors without backgrounds) -->
+      <!-- Dark Polygon Top Center -->
+      <div class="absolute top-6 left-1/2 transform -translate-x-1/2 pointer-events-none select-none z-0">
+        <img src="/assets/images/figma_1_1208.svg" alt="" class="w-14 h-10 md:w-20 md:h-14 object-contain" />
+      </div>
+
+      <!-- Blue Rounded Block (Bottom Left) -->
+      <div class="absolute bottom-8 left-6 md:left-24 pointer-events-none select-none z-0">
+        <img src="/assets/images/figma_1_1209.svg" alt="" class="w-16 h-12 md:w-24 md:h-16 object-contain" />
+      </div>
+
+      <!-- Yellow 8-point Flower Star (Bottom Right) -->
+      <div class="absolute bottom-6 right-6 md:right-24 pointer-events-none select-none z-0">
+        <img src="/assets/images/figma_1_400.svg" alt="" class="w-16 h-16 md:w-24 md:h-24 object-contain" />
+      </div>
+
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-4">
+        <span class="text-xs font-bold uppercase tracking-wider text-[#9B7641]">Our Courses</span>
+        
+        <h1 class="text-4xl sm:text-5xl lg:text-[58px] font-extrabold tracking-tight text-[#111624] leading-[1.15]">
+          Build Skills That Open <span class="text-[#9B7641]">Real Doors</span>
+        </h1>
+
+        <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed font-normal">
+          Every course is designed around practical outcomes: live instruction, mentor support, and real projects you can show employers.
+        </p>
+      </div>
+    </section>
+
+    <!-- FILTER BAR (LEFT-ALIGNED AS PER SPEC) -->
+    <section class="py-6 bg-[#FAFAFA]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex items-center justify-start flex-wrap gap-2.5 sm:gap-3" id="course-filters">
+          <button data-filter="all" class="filter-btn active-filter px-5 py-2 rounded-full text-xs sm:text-sm font-semibold transition-all bg-[#111624] text-white shadow-sm">
+            All
+          </button>
+          <button data-filter="ai-tech" class="filter-btn px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-white text-gray-700 hover:bg-gray-100 border border-gray-200">
+            AI & Tech
+          </button>
+          <button data-filter="design" class="filter-btn px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-white text-gray-700 hover:bg-gray-100 border border-gray-200">
+            Design
+          </button>
+          <button data-filter="security" class="filter-btn px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-white text-gray-700 hover:bg-gray-100 border border-gray-200">
+            Security
+          </button>
+          <button data-filter="marketing" class="filter-btn px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-white text-gray-700 hover:bg-gray-100 border border-gray-200">
+            Marketing
+          </button>
+          <button data-filter="development" class="filter-btn px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-white text-gray-700 hover:bg-gray-100 border border-gray-200">
+            Development
+          </button>
+          <button data-filter="creative" class="filter-btn px-5 py-2 rounded-full text-xs sm:text-sm font-medium transition-all bg-white text-gray-700 hover:bg-gray-100 border border-gray-200">
+            Creative
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- COURSES GRID (7 CARDS) -->
+    <section class="py-8 md:py-12 bg-[#FAFAFA]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="courses-full-grid">
+          <!-- Rendered dynamically with live filter -->
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTTOM CTA BANNER -->
+    <section class="py-20 bg-white border-t border-[#EAE8E3] text-center">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-[#111624] tracking-tight">
+          Not Sure Which Course to Pick?
+        </h2>
+        <p class="text-sm sm:text-base text-gray-600 max-w-xl mx-auto leading-relaxed">
+          Reach out to our team and we'll help you find the right learning path based on your goals and background.
+        </p>
+        <div class="pt-2">
+          <a href="contact.html" 
+             class="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-[#111624] hover:bg-[#232938] text-white text-sm font-medium shadow-md hover:shadow-lg transition-all">
+            Get in Touch
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Modal -->
+  <div id="modal-placeholder"></div>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { renderNavbar } from '/src/components/Navbar.js';
+    import { renderFooter } from '/src/components/Footer.js';
+    import { renderRegistrationModal } from '/src/components/RegistrationModal.js';
+    import { courses } from '/src/data/courses.js';
+    import '/src/scripts/main.js';
+
+    document.getElementById('navbar-placeholder').innerHTML = renderNavbar('courses');
+    document.getElementById('footer-placeholder').innerHTML = renderFooter();
+    document.getElementById('modal-placeholder').innerHTML = renderRegistrationModal();
+
+    const grid = document.getElementById('courses-full-grid');
+    const filterBtns = document.querySelectorAll('.filter-btn');
+
+    function renderCourseCards(filter = 'all') {
+      const filtered = filter === 'all' 
+        ? courses 
+        : courses.filter(c => c.categoryFilter === filter);
+
+      if (!grid) return;
+
+      grid.innerHTML = filtered.map(c => `
+        <div class="bg-white rounded-3xl border border-[#EAE8E3] shadow-card hover:shadow-card-hover card-transition flex flex-col justify-between overflow-hidden" data-category="${c.categoryFilter}">
+          <div>
+            <!-- Pastel Top Block: Single solid pastel colour filling top portion directly -->
+            <div class="${c.bgPastel} h-44 w-full flex items-center justify-center p-4">
+              <img src="${c.image}" alt="${c.title}" class="max-h-36 max-w-full object-contain hover:scale-105 transition-transform" />
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5">
+              <!-- Badges -->
+              <div class="flex items-center gap-2 mb-2 flex-wrap">
+                <span class="px-2.5 py-0.5 rounded-md text-[11px] font-semibold bg-gray-100 text-gray-700">
+                  ${c.category}
+                </span>
+                <span class="px-2.5 py-0.5 rounded-md text-[11px] font-medium bg-[#FEF3D6] text-[#9B7641]">
+                  ${c.level}
+                </span>
+              </div>
+
+              <h3 class="text-lg font-bold text-[#111624] mb-1.5 leading-snug">${c.title}</h3>
+              <p class="text-xs text-gray-500 leading-relaxed line-clamp-2">${c.shortDescription}</p>
+            </div>
+          </div>
+
+          <!-- Bottom Row with Duration and Register CTA -->
+          <div class="px-5 pb-5 pt-3 border-t border-gray-100 flex items-center justify-between text-xs">
+            <div class="flex items-center gap-1.5 text-gray-500 font-medium">
+              <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2"/>
+              </svg>
+              <span>${c.duration}</span>
+            </div>
+
+            <a href="course-detail.html?id=${c.id}" class="inline-flex items-center gap-1.5 font-bold text-[#111624] hover:text-[#9B7641] transition-colors">
+              <span>Register Now</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Initial render
+    renderCourseCards('all');
+
+    // Filter Button Click Handlers
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        filterBtns.forEach(b => {
+          b.classList.remove('bg-[#111624]', 'text-white', 'shadow-sm', 'font-semibold');
+          b.classList.add('bg-white', 'text-gray-700', 'border', 'border-gray-200', 'font-medium');
+        });
+        btn.classList.remove('bg-white', 'text-gray-700', 'border', 'border-gray-200', 'font-medium');
+        btn.classList.add('bg-[#111624]', 'text-white', 'shadow-sm', 'font-semibold');
+
+        const selected = btn.getAttribute('data-filter');
+        renderCourseCards(selected);
+      });
+    });
+  </script>
+</body>
+</html>

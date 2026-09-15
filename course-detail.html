@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Course Details - MoonTechLife</title>
+  <meta name="description" content="View comprehensive course details, syllabus, requirements, and enrollment information at MoonTechLife." />
+  <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+</head>
+<body class="bg-[#FAFAFA] text-[#111624]">
+
+  <!-- Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <main id="course-detail-container">
+    <!-- Dynamic Course Content Loaded Here -->
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Modal -->
+  <div id="modal-placeholder"></div>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { renderNavbar } from '/src/components/Navbar.js';
+    import { renderFooter } from '/src/components/Footer.js';
+    import { renderRegistrationModal } from '/src/components/RegistrationModal.js';
+    import { courses, getCourseById } from '/src/data/courses.js';
+    import '/src/scripts/main.js';
+
+    document.getElementById('navbar-placeholder').innerHTML = renderNavbar('courses');
+    document.getElementById('footer-placeholder').innerHTML = renderFooter();
+    document.getElementById('modal-placeholder').innerHTML = renderRegistrationModal();
+
+    // Parse URL parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    const courseId = urlParams.get('id') || 'ai-automation';
+    const course = getCourseById(courseId);
+
+    // Update Page Title
+    document.title = `${course.title} - MoonTechLife`;
+
+    // Render Course Detail DOM
+    const container = document.getElementById('course-detail-container');
+    if (container) {
+      container.innerHTML = `
+        <!-- HERO BANNER (DYNAMIC COLOR THEMED) -->
+        <section class="relative overflow-hidden ${course.heroBg || 'bg-[#FFEEDB]'} border-b border-black/5 py-14 lg:py-20">
+          <!-- Decorative Shape from Figma -->
+          <div class="absolute top-4 right-1/3 pointer-events-none select-none z-0 opacity-80 hidden md:block">
+            <img src="/assets/images/figma_1_1406.svg" alt="" class="w-16 h-20 object-contain" />
+          </div>
+          
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+              
+              <!-- Left Column: Title & Intro -->
+              <div class="lg:col-span-7 space-y-5">
+                <!-- Badges -->
+                <div class="flex items-center gap-2.5 flex-wrap">
+                  <span class="px-3.5 py-1 rounded-full text-xs font-semibold bg-white text-gray-800 shadow-sm">
+                    ${course.category}
+                  </span>
+                  <span class="px-3.5 py-1 rounded-full text-xs font-semibold bg-white/80 text-[#9B7641] shadow-sm">
+                    ${course.level}
+                  </span>
+                  <span class="px-3.5 py-1 rounded-full text-xs font-medium bg-white text-gray-700 flex items-center gap-1.5 shadow-sm">
+                    <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2"/>
+                    </svg>
+                    <span>${course.duration}</span>
+                  </span>
+                </div>
+
+                <h1 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#111624] tracking-tight">
+                  ${course.title}
+                </h1>
+
+                <p class="text-sm sm:text-base text-gray-700 max-w-xl leading-relaxed">
+                  ${course.shortDescription}
+                </p>
+
+                <div class="flex flex-wrap items-center gap-4 pt-3">
+                  <button data-action="register" data-course-id="${course.id}" data-course-title="${course.title}"
+                          class="px-7 py-3.5 rounded-full bg-[#111624] hover:bg-[#232938] text-white text-sm font-semibold transition-all shadow-sm hover:shadow flex items-center gap-2">
+                    <span>Register for This Course</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                    </svg>
+                  </button>
+
+                  <a href="courses.html" 
+                     class="px-6 py-3.5 rounded-full bg-white/80 hover:bg-white text-[#111624] text-sm font-medium border border-black/10 transition-all shadow-sm">
+                    View All Courses
+                  </a>
+                </div>
+              </div>
+
+              <!-- Right Column: Course Hero Illustration -->
+              <div class="lg:col-span-5 flex justify-center lg:justify-end relative">
+                <div class="relative max-w-sm sm:max-w-md w-full">
+                  <img src="${course.id === 'ai-automation' ? '/assets/images/course-detail-ai-screen.png' : course.image}" 
+                       alt="${course.title}" 
+                       class="w-full h-auto object-contain drop-shadow-xl" />
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- MAIN TWO-COLUMN CONTENT -->
+        <section class="py-16 md:py-24 bg-white">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
+              
+              <!-- Left Column: Syllabus, Outcomes, Audience, Requirements -->
+              <div class="lg:col-span-8 space-y-12">
+                
+                <!-- Course Overview -->
+                <div class="space-y-4">
+                  <h2 class="text-2xl font-bold text-[#111624] tracking-tight">Course Overview</h2>
+                  <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+                    ${course.overview}
+                  </p>
+                </div>
+
+                <!-- What You'll Learn -->
+                <div class="space-y-6">
+                  <h2 class="text-2xl font-bold text-[#111624] tracking-tight">What You'll Learn</h2>
+                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    ${course.whatYoullLearn.map(item => `
+                      <div class="flex items-start gap-3">
+                        <div class="w-5 h-5 rounded-full bg-[#E3F8EB] text-[#067647] flex items-center justify-center flex-shrink-0 mt-0.5 text-xs font-bold">
+                          ✓
+                        </div>
+                        <span class="text-xs sm:text-sm text-gray-700 leading-normal">${item}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+
+                <!-- Course Structure (Accordions) -->
+                <div class="space-y-6">
+                  <h2 class="text-2xl font-bold text-[#111624] tracking-tight">Course Structure</h2>
+                  <div class="space-y-3" id="modules-accordion">
+                    ${course.modules.map((mod, idx) => `
+                      <div class="border border-[#EAE8E3] rounded-2xl overflow-hidden bg-[#FAFAFA]">
+                        <button class="accordion-toggle w-full p-4 sm:p-5 flex items-center justify-between text-left font-bold text-sm text-[#111624] hover:bg-gray-100/60 transition-colors"
+                                data-index="${idx}">
+                          <span>${mod.title}</span>
+                          <span class="accordion-icon text-lg font-light text-gray-400 ml-4 transition-transform duration-200">+</span>
+                        </button>
+                        <div class="accordion-panel hidden px-5 pb-5 pt-1 text-xs sm:text-sm text-gray-600 border-t border-gray-100 bg-white">
+                          <p class="leading-relaxed">${mod.description}</p>
+                        </div>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+
+                <!-- Who This Course Is For -->
+                <div class="space-y-4">
+                  <h2 class="text-2xl font-bold text-[#111624] tracking-tight">Who This Course Is For</h2>
+                  <ul class="space-y-2.5">
+                    ${course.whoIsThisFor.map(item => `
+                      <li class="flex items-center gap-2 text-xs sm:text-sm text-gray-700">
+                        <span class="text-[#9B7641] font-bold">→</span>
+                        <span>${item}</span>
+                      </li>
+                    `).join('')}
+                  </ul>
+                </div>
+
+                <!-- Requirements -->
+                <div class="space-y-4">
+                  <h2 class="text-2xl font-bold text-[#111624] tracking-tight">Requirements</h2>
+                  <ul class="space-y-2">
+                    ${course.requirements.map(item => `
+                      <li class="flex items-start gap-2 text-xs sm:text-sm text-gray-600">
+                        <span class="text-gray-400">•</span>
+                        <span>${item}</span>
+                      </li>
+                    `).join('')}
+                  </ul>
+                </div>
+
+              </div>
+
+              <!-- Right Column: Sticky Summary Card -->
+              <div class="lg:col-span-4 sticky top-24">
+                <div class="bg-[#F8F7F3] rounded-3xl p-6 border border-[#E8E6DF] shadow-card space-y-6">
+                  
+                  <!-- Thumbnail -->
+                  <div class="${course.bgPastel} rounded-2xl p-4 flex items-center justify-center h-44 overflow-hidden">
+                    <img src="${course.image}" alt="${course.title}" class="max-h-36 max-w-full object-contain" />
+                  </div>
+
+                  <!-- Details Table -->
+                  <div class="space-y-3.5 text-xs sm:text-sm divide-y divide-gray-200/70">
+                    <div class="flex items-center justify-between pt-1">
+                      <span class="text-gray-500">Duration</span>
+                      <span class="font-bold text-[#111624]">${course.duration}</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-3">
+                      <span class="text-gray-500">Level</span>
+                      <span class="font-bold text-[#111624]">${course.level}</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-3">
+                      <span class="text-gray-500">Category</span>
+                      <span class="font-bold text-[#111624]">${course.category}</span>
+                    </div>
+                    <div class="flex items-center justify-between pt-3">
+                      <span class="text-gray-500">Cost</span>
+                      <span class="font-bold text-[#067647]">${course.cost}</span>
+                    </div>
+                  </div>
+
+                  <!-- CTA Button -->
+                  <div class="pt-2 space-y-2 text-center">
+                    <button data-action="register" data-course-id="${course.id}" data-course-title="${course.title}"
+                            class="w-full py-3.5 px-6 rounded-full bg-[#111624] hover:bg-[#232938] text-white font-semibold text-xs sm:text-sm transition-all shadow-md hover:shadow-lg">
+                      Register for This Course
+                    </button>
+                    <p class="text-[11px] text-gray-500">Courses are free. A small admin fee may apply.</p>
+                  </div>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </section>
+
+        <!-- WHAT STUDENTS SAY -->
+        <section class="py-16 bg-[#FAFAFA] border-t border-[#EAE8E3]">
+          <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="text-3xl font-extrabold text-[#111624] tracking-tight mb-8">What Students Say</h2>
+            
+            <div class="max-w-xl bg-white rounded-3xl p-6 sm:p-8 border border-[#EAE8E3] shadow-card space-y-4">
+              <p class="text-sm text-gray-700 leading-relaxed font-normal">
+                "${course.studentQuote.quote}"
+              </p>
+              <div class="flex items-center gap-3 pt-2">
+                <div class="w-10 h-10 rounded-full bg-[#111624] text-white flex items-center justify-center font-bold text-sm">
+                  ${course.studentQuote.name.charAt(0)}
+                </div>
+                <div>
+                  <h4 class="text-xs sm:text-sm font-bold text-[#111624]">${course.studentQuote.name}</h4>
+                  <p class="text-[11px] text-gray-500">${course.studentQuote.role}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- READY TO GET STARTED BOTTOM BANNER -->
+        <section class="py-20 bg-white border-t border-[#EAE8E3] text-center">
+          <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+            <h2 class="text-3xl sm:text-4xl font-extrabold text-[#111624] tracking-tight">
+              Ready to Get Started?
+            </h2>
+            <p class="text-sm sm:text-base text-gray-600 max-w-xl mx-auto leading-relaxed">
+              Join hundreds of learners already building their future with MoonTech Life.
+            </p>
+            <div class="pt-2">
+              <button data-action="register" data-course-id="${course.id}" data-course-title="${course.title}"
+                      class="inline-flex items-center justify-center px-8 py-4 rounded-full bg-[#111624] hover:bg-[#232938] text-white text-sm font-semibold shadow-md hover:shadow-lg transition-all gap-2">
+                <span>Register for ${course.title}</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+        </section>
+      `;
+
+      // Setup accordion functionality
+      document.querySelectorAll('.accordion-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const panel = btn.nextElementSibling;
+          const icon = btn.querySelector('.accordion-icon');
+          const isHidden = panel.classList.contains('hidden');
+          
+          if (isHidden) {
+            panel.classList.remove('hidden');
+            icon.textContent = '−';
+          } else {
+            panel.classList.add('hidden');
+            icon.textContent = '+';
+          }
+        });
+      });
+
+      // Attach register clicks
+      document.querySelectorAll('[data-action="register"]').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.preventDefault();
+          if (window.openRegistrationModal) {
+            window.openRegistrationModal(course.id, course.title);
+          }
+        });
+      });
+    }
+  </script>
+</body>
+</html>

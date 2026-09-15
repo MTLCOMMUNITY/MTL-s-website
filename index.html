@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MoonTechLife - Learn Tech The Way A Community Actually Learns It</title>
+  <meta name="description" content="MoonTechLife is a Nigerian tech community empowering beginners and professionals with real-world skills, live mentorship, and collaborative learning." />
+  <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+</head>
+<body class="bg-[#FAFAFA] text-[#111624]">
+
+  <!-- Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <main class="overflow-x-hidden">
+    <!-- HERO SECTION (EDGE-TO-EDGE TOPOGRAPHIC BACKGROUND) -->
+    <section class="relative pt-10 sm:pt-14 lg:pt-16 pb-0 bg-hero-topo w-full z-20">
+      
+      <!-- Decorative Floating Shapes (Large & Prominent) -->
+      <!-- Green 4-point star (Top Left) -->
+      <div class="absolute top-10 left-6 md:left-16 pointer-events-none select-none z-10">
+        <img src="/assets/images/figma_1_136.svg" alt="Decorative star" class="w-16 h-16 md:w-24 md:h-24 object-contain" />
+      </div>
+
+      <!-- Yellow asterisk (Top Right) -->
+      <div class="absolute top-8 right-8 md:right-1/4 pointer-events-none select-none z-10">
+        <img src="/assets/images/figma_1_134.svg" alt="Decorative asterisk" class="w-20 h-20 md:w-28 md:h-28 object-contain" />
+      </div>
+
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-20">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-6 items-end">
+          
+          <!-- Hero Text (Scaled up proportionally to match large image) -->
+          <div class="lg:col-span-5 space-y-6 pt-4 lg:pt-0 pb-12 lg:pb-16 relative z-10">
+            <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-[62px] xl:text-[68px] font-extrabold tracking-tight text-[#111624] leading-[1.08]">
+              Learn Tech The Way <br class="hidden sm:inline"/>
+              A <span class="text-[#9B7641]">Community</span> <br class="hidden sm:inline"/>
+              Actually Learns It
+            </h1>
+
+            <p class="text-base sm:text-lg lg:text-xl text-gray-700 max-w-lg leading-relaxed font-normal">
+              Grow alongside mentors and fellow learners through live classes, practical projects, and collaborative learning designed for real-world skills.
+            </p>
+
+            <!-- CTA Buttons -->
+            <div class="flex flex-wrap items-center gap-4 pt-2">
+              <a href="courses.html" 
+                 class="px-7 py-4 rounded-full bg-[#EFEFEA] hover:bg-[#E5E5DF] text-[#111624] text-sm sm:text-base font-semibold border border-[#E0DED7] transition-all">
+                Register for a course
+              </a>
+              <a href="contact.html?modal=login" 
+                 class="px-8 py-4 rounded-full bg-[#111624] hover:bg-[#232938] text-white text-sm sm:text-base font-semibold transition-all shadow-sm hover:shadow">
+                Login to portal
+              </a>
+            </div>
+
+            <!-- Blue Hand-drawn Star Doodle -->
+            <div class="pt-2 pl-12 pointer-events-none select-none">
+              <img src="/assets/images/figma_1_138.svg" alt="Star doodle" class="w-14 h-14 md:w-20 md:h-20 object-contain" />
+            </div>
+          </div>
+
+          <!-- Hero Image (Transparent background-removed image, 720px x 800px, positioned to the extreme right) -->
+          <div class="lg:col-span-7 relative flex justify-center lg:justify-end items-end self-end lg:-mr-8 xl:-mr-16 z-0">
+            <img src="/assets/images/hero-students-transparent.png" 
+                 alt="MoonTechLife learners collaborating happily on a laptop" 
+                 class="w-full max-w-none h-auto lg:w-[720px] lg:h-[800px] object-contain object-right-bottom block" 
+                 loading="eager" />
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Large Yellow Curved Arrow pointing downwards towards Courses section (Restored position) -->
+      <div class="hidden lg:block absolute -bottom-14 left-[12%] select-none pointer-events-none z-30">
+        <img src="/assets/images/figma_1_226.svg" alt="" class="w-28 lg:w-36 h-auto object-contain" />
+      </div>
+
+    </section>
+
+    <!-- COURSES SECTION -->
+    <section class="py-20 md:py-28 bg-[#FAFAFA] relative">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="text-center max-w-2xl mx-auto space-y-3 mb-16">
+          <span class="text-xs font-semibold uppercase tracking-wider text-[#9B7641]">Courses</span>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-[#111624] tracking-tight">
+            Explore Your Learning Paths
+          </h2>
+          <p class="text-sm sm:text-base text-gray-600 leading-relaxed">
+            Choose from carefully designed courses that combine live instruction, practical projects, and continuous support to help you build real, job-ready skills.
+          </p>
+        </div>
+
+        <!-- 7 Course Cards Grid Matching Figma Frame Style -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6" id="home-courses-grid">
+          <!-- Rendered dynamically -->
+        </div>
+
+      </div>
+
+      <!-- Large Yellow curved arrow pointing to About Us -->
+      <div class="hidden lg:block absolute bottom-4 right-12 select-none pointer-events-none z-10">
+        <img src="/assets/images/figma_1_227.svg" alt="" class="w-32 lg:w-44 h-auto object-contain" />
+      </div>
+    </section>
+
+    <!-- ABOUT US HOMEPAGE SPOTLIGHT -->
+    <section class="py-20 md:py-28 bg-white border-y border-[#EAE8E3]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          <!-- Student Photo with Figma circular frame 3:207 -->
+          <div class="lg:col-span-5 flex justify-center">
+            <div class="relative max-w-sm sm:max-w-md w-full flex items-center justify-center">
+              <img src="/assets/images/home-about-student-figma.png" 
+                   alt="MoonTechLife student with backpack and laptop giving thumbs up" 
+                   class="w-full h-auto object-contain"
+                   loading="lazy" />
+            </div>
+          </div>
+
+          <!-- Content -->
+          <div class="lg:col-span-7 space-y-6">
+            <span class="text-xs font-semibold uppercase tracking-wider text-[#9B7641]">About us</span>
+            <h2 class="text-3xl sm:text-4xl lg:text-[44px] font-extrabold text-[#111624] tracking-tight leading-tight">
+              Learning Built Around Practice Not Just Theory
+            </h2>
+
+            <div class="space-y-4 text-gray-600 text-sm sm:text-base leading-relaxed">
+              <p>
+                <strong class="text-[#9B7641] font-semibold">MoonTech Life</strong> is more than an online learning platform. It's a community where aspiring tech professionals learn by building, collaborating, and applying their skills to real-world projects.
+              </p>
+              <p>
+                Whether you're joining a live class, watching a recorded session, submitting an assignment, or exploring additional resources, the portal is designed to keep your learning organised and accessible.
+              </p>
+              <p>
+                More than just a community, MoonTech Life is a space where people learn together, support one another, and grow through shared knowledge, real projects, and meaningful connections.
+              </p>
+            </div>
+
+            <div class="pt-2">
+              <a href="about.html" class="inline-flex items-center gap-2 text-sm font-semibold text-[#111624] hover:text-[#9B7641] transition-colors">
+                <span>Learn more about our story</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- SUCCESS STORIES SECTION (BACKGROUND = #F4F4F5) -->
+    <section id="testimonials" class="py-20 md:py-28 bg-[#F4F4F5]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="text-center max-w-2xl mx-auto space-y-3 mb-16">
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-[#111624] tracking-tight">
+            Success Stories from Our Community
+          </h2>
+          <p class="text-sm sm:text-base text-gray-600">
+            Hear from our graduates who have transformed their careers through our programs.
+          </p>
+        </div>
+
+        <!-- 6 Testimonial Cards Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="home-testimonials-grid">
+          <!-- Rendered dynamically -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- CALL TO ACTION BANNER -->
+    <section class="py-20 bg-white border-t border-[#EAE8E3] text-center">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-[#111624] tracking-tight">
+          Join a community that thrives
+        </h2>
+        <p class="text-sm sm:text-base text-gray-600 max-w-xl mx-auto leading-relaxed">
+          Follow us on our community channels and be the first to hear about upcoming hackathons, competitions, and challenges.
+        </p>
+        <div class="pt-2">
+          <a href="contact.html" 
+             class="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-[#111624] hover:bg-[#232938] text-white text-sm font-medium shadow-md hover:shadow-lg transition-all">
+            Get in Touch
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Registration Modal -->
+  <div id="modal-placeholder"></div>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { renderNavbar } from '/src/components/Navbar.js';
+    import { renderFooter } from '/src/components/Footer.js';
+    import { renderRegistrationModal } from '/src/components/RegistrationModal.js';
+    import { courses } from '/src/data/courses.js';
+    import { homeTestimonials } from '/src/data/testimonials.js';
+    import '/src/scripts/main.js';
+
+    document.getElementById('navbar-placeholder').innerHTML = renderNavbar('home');
+    document.getElementById('footer-placeholder').innerHTML = renderFooter();
+    document.getElementById('modal-placeholder').innerHTML = renderRegistrationModal();
+
+    // Render 7 course cards matching Figma frame style
+    const coursesGrid = document.getElementById('home-courses-grid');
+    if (coursesGrid) {
+      coursesGrid.innerHTML = courses.map((c, i) => `
+        <div class="bg-white rounded-3xl border border-[#EAE8E3] shadow-card hover:shadow-card-hover card-transition flex flex-col justify-between overflow-hidden ${i === 6 ? 'lg:col-span-1 sm:col-span-2' : ''}">
+          <div>
+            <!-- Pastel Top Block: Single solid pastel colour filling top portion directly -->
+            <div class="${c.bgPastel} h-44 w-full flex items-center justify-center p-4">
+              <img src="${c.image}" alt="${c.title}" class="max-h-36 max-w-full object-contain hover:scale-105 transition-transform" />
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-5">
+              <h3 class="text-lg font-bold text-[#111624] mb-1.5 leading-snug">${c.title}</h3>
+              <p class="text-xs text-gray-500 leading-relaxed line-clamp-2">${c.shortDescription}</p>
+            </div>
+          </div>
+
+          <div class="px-5 pb-5 pt-3 border-t border-gray-100 flex items-center justify-between text-xs">
+            <span class="text-gray-400 font-medium">${c.duration}</span>
+            <a href="course-detail.html?id=${c.id}" class="inline-flex items-center gap-1.5 font-bold text-[#111624] hover:text-[#9B7641] transition-colors">
+              <span>Register Now</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+
+    // Render 6 Testimonial Cards on #F4F4F5 background
+    const testGrid = document.getElementById('home-testimonials-grid');
+    if (testGrid) {
+      testGrid.innerHTML = homeTestimonials.map(t => `
+        <div class="bg-white rounded-3xl p-6 sm:p-7 border border-[#EAE8E3] card-transition flex flex-col justify-between space-y-6">
+          <div class="space-y-4">
+            <!-- Author Header -->
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-full bg-[#111624] text-white flex items-center justify-center font-bold text-sm">
+                ${t.avatarLetter}
+              </div>
+              <div>
+                <h4 class="text-sm font-bold text-[#111624]">${t.name}</h4>
+                <p class="text-xs text-gray-500">${t.role}</p>
+              </div>
+            </div>
+
+            <!-- Quote Text -->
+            <div class="text-xs sm:text-sm text-gray-700 leading-relaxed">
+              ${t.quoteHtml}
+            </div>
+          </div>
+
+          <!-- Social Proof Link -->
+          <div class="pt-3 border-t border-gray-100 flex items-center justify-end">
+            <a href="${t.platformLink}" target="_blank" rel="noopener noreferrer" 
+               class="inline-flex items-center gap-1.5 text-xs font-semibold text-gray-600 hover:text-[#111624] transition-colors">
+              <span>${t.linkText}</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+  </script>
+</body>
+</html>

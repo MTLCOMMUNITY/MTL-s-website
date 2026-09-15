@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Programs - MoonTechLife Community</title>
+  <meta name="description" content="Discover MoonTechLife programs: 100 Days Tech Challenge, Virtual Gaming Challenge, Hackathons, Competitions, and Mentorship." />
+  <link rel="icon" type="image/svg+xml" href="/assets/icons/favicon.svg" />
+  <link rel="stylesheet" href="/src/styles/main.css" />
+</head>
+<body class="bg-[#FAFAFA] text-[#111624]">
+
+  <!-- Navbar -->
+  <div id="navbar-placeholder"></div>
+
+  <main>
+    <!-- HERO SECTION -->
+    <section class="relative overflow-hidden pt-12 pb-20 md:py-24 bg-hero-topo bg-cover bg-center text-center">
+      
+      <!-- Decorative Floating Shapes -->
+      <!-- Pink Flower (Top Left) -->
+      <div class="absolute top-8 left-6 md:left-20 pointer-events-none select-none z-0">
+        <img src="/assets/images/shape-pink-flower.png" alt="" class="w-16 h-16 md:w-24 md:h-24 object-contain" />
+      </div>
+
+      <!-- Purple Teardrop (Bottom Left) -->
+      <div class="absolute bottom-10 left-8 md:left-28 pointer-events-none select-none z-0">
+        <img src="/assets/images/shape-purple-drop.png" alt="" class="w-14 h-14 md:w-20 md:h-20 object-contain" />
+      </div>
+
+      <!-- Yellow Split Shape (Top Right) -->
+      <div class="absolute top-10 right-8 md:right-24 pointer-events-none select-none z-0">
+        <img src="/assets/images/shape-yellow-split.png" alt="" class="w-16 h-16 md:w-24 md:h-24 object-contain" />
+      </div>
+
+      <!-- Blue Flower (Bottom Right) -->
+      <div class="absolute bottom-8 right-6 md:right-20 pointer-events-none select-none z-0">
+        <img src="/assets/images/shape-blue-flower.png" alt="" class="w-16 h-16 md:w-24 md:h-24 object-contain" />
+      </div>
+
+      <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 space-y-5">
+        <span class="text-xs font-bold uppercase tracking-wider text-[#9B7641]">Programs</span>
+        
+        <h1 class="text-4xl sm:text-5xl lg:text-[58px] font-extrabold tracking-tight text-[#111624] leading-[1.15]">
+          More Than Courses; <br class="hidden sm:inline"/>
+          <span class="text-[#9B7641]">Experiences</span> That Shape You
+        </h1>
+
+        <p class="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto leading-relaxed font-normal">
+          From hackathons and competitions to community initiatives and challenges. MoonTechLife programs push you beyond the classroom and into the real world.
+        </p>
+      </div>
+    </section>
+
+    <!-- PROGRAMS GRID (6 CARDS) -->
+    <section class="py-16 md:py-24 bg-[#FAFAFA]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="programs-grid">
+          <!-- Rendered dynamically -->
+        </div>
+
+      </div>
+    </section>
+
+    <!-- FEATURED PROGRAM SPOTLIGHT (100 DAYS TECH CHALLENGE) -->
+    <section id="100days-spotlight" class="py-20 md:py-28 bg-[#F4F4F5] border-y border-[#E2DFC7] relative overflow-hidden">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+          
+          <!-- Content Left -->
+          <div class="lg:col-span-6 space-y-6">
+            <span class="text-xs font-bold uppercase tracking-wider text-[#9B7641]">Featured Program</span>
+            
+            <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#111624] tracking-tight">
+              The 100 Days Tech Challenge
+            </h2>
+
+            <p class="text-base sm:text-lg text-gray-600 leading-relaxed max-w-xl">
+              Our flagship community initiative. 100 days of consistent learning, building, and growing alongside hundreds of participants. This is where careers are made.
+            </p>
+
+            <div class="pt-2 flex flex-wrap items-center gap-4">
+              <a href="program-detail.html?id=100days"
+                 class="inline-flex items-center gap-2 px-7 py-4 rounded-full bg-[#111624] hover:bg-[#232938] text-white text-sm font-semibold transition-all shadow-md hover:shadow-lg">
+                <span>Explore the Challenge</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+              </a>
+              <button data-action="register" data-course-id="100days" data-course-title="100 Days Tech Challenge"
+                      class="px-7 py-4 rounded-full bg-[#9B7641] hover:bg-[#856333] text-white text-sm font-semibold transition-all shadow-md hover:shadow-lg">
+                <span>Join Waitlist</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Featured Student Image: Actual photograph inside circular frame with head extending outside -->
+          <div class="lg:col-span-6 flex justify-center lg:justify-end">
+            <div class="relative w-full max-w-[360px] sm:max-w-[420px] lg:max-w-[460px] flex items-center justify-center">
+              <img src="/assets/images/program-featured-student.png" 
+                   alt="100 Days Tech Challenge featured student" 
+                   class="w-full h-auto object-contain" 
+                   loading="lazy" />
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- BOTTOM CTA BANNER -->
+    <section class="py-20 bg-white border-t border-[#EAE8E3] text-center">
+      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+        <h2 class="text-3xl sm:text-4xl font-extrabold text-[#111624] tracking-tight">
+          Want to Know When New Programs Launch?
+        </h2>
+        <p class="text-sm sm:text-base text-gray-600 max-w-xl mx-auto leading-relaxed">
+          Follow us on our community channels and be the first to hear about upcoming hackathons, competitions, and challenges.
+        </p>
+        <div class="pt-2">
+          <a href="contact.html" 
+             class="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-[#111624] hover:bg-[#232938] text-white text-sm font-medium shadow-md hover:shadow-lg transition-all">
+            Get in Touch
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <div id="footer-placeholder"></div>
+
+  <!-- Modal -->
+  <div id="modal-placeholder"></div>
+
+  <!-- Scripts -->
+  <script type="module">
+    import { renderNavbar } from '/src/components/Navbar.js';
+    import { renderFooter } from '/src/components/Footer.js';
+    import { renderRegistrationModal } from '/src/components/RegistrationModal.js';
+    import { programs } from '/src/data/programs.js';
+    import '/src/scripts/main.js';
+
+    document.getElementById('navbar-placeholder').innerHTML = renderNavbar('programs');
+    document.getElementById('footer-placeholder').innerHTML = renderFooter();
+    document.getElementById('modal-placeholder').innerHTML = renderRegistrationModal();
+
+    // Render 6 program cards
+    const grid = document.getElementById('programs-grid');
+    if (grid) {
+      grid.innerHTML = programs.map(p => `
+        <div class="rounded-3xl border border-[#EAE8E3] overflow-hidden shadow-card hover:shadow-card-hover card-transition flex flex-col justify-between ${p.isFeaturedCard ? 'bg-[#FEF3D6]' : 'bg-white'}">
+          <div class="flex flex-col flex-1">
+            <!-- Cover Image Container: fills edge-to-edge -->
+            <div class="h-52 w-full overflow-hidden bg-gray-100">
+              <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover hover:scale-105 transition-transform duration-300" />
+            </div>
+
+            <!-- Card Body -->
+            <div class="p-6 sm:p-7 space-y-4 flex-1 flex flex-col justify-start">
+              <!-- Tag & Status Badges -->
+              <div class="flex items-center gap-2 flex-wrap">
+                <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full ${p.badgeClass}">
+                  ${p.badge}
+                </span>
+                <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold rounded-full ${p.isActive ? 'bg-emerald-100 text-emerald-800' : 'bg-gray-100 text-gray-600'}">
+                  ${p.status}
+                </span>
+              </div>
+
+              <h3 class="text-xl font-bold text-[#111624] leading-snug">${p.title}</h3>
+              <p class="text-xs sm:text-sm text-gray-600 leading-relaxed">${p.description}</p>
+            </div>
+          </div>
+
+          <!-- Bottom Footer Details (Generous spacing separating details and CTA) -->
+          <div class="px-6 sm:px-7 pb-6 pt-5 mt-auto border-t border-black/5 flex items-center justify-between text-xs">
+            <div class="space-y-1 text-gray-500 font-medium">
+              <p class="text-[#111624] font-semibold">${p.details ? p.details.duration : p.duration}</p>
+              <p>${p.participants || (p.details ? p.details.participation : '')}</p>
+            </div>
+
+            <a href="program-detail.html?id=${p.id}" class="inline-flex items-center gap-1.5 font-bold text-[#111624] hover:text-[#9B7641] transition-colors py-1 px-1">
+              <span>Learn more</span>
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      `).join('');
+    }
+  </script>
+</body>
+</html>
