@@ -19,17 +19,17 @@
       
       <!-- Decorative Shapes (Clean individual vectors without backgrounds) -->
       <!-- Dark Polygon Top Center -->
-      <div class="absolute top-6 left-1/2 transform -translate-x-1/2 pointer-events-none select-none z-0">
+      <div class="hidden md:block absolute top-6 left-1/2 transform -translate-x-1/2 pointer-events-none select-none z-0">
         <img src="/assets/images/figma_1_1208.svg" alt="" class="w-14 h-10 md:w-20 md:h-14 object-contain" />
       </div>
 
       <!-- Blue Rounded Block (Bottom Left) -->
-      <div class="absolute bottom-8 left-6 md:left-24 pointer-events-none select-none z-0">
+      <div class="hidden md:block absolute bottom-8 left-6 md:left-24 pointer-events-none select-none z-0">
         <img src="/assets/images/figma_1_1209.svg" alt="" class="w-16 h-12 md:w-24 md:h-16 object-contain" />
       </div>
 
       <!-- Yellow 8-point Flower Star (Bottom Right) -->
-      <div class="absolute bottom-6 right-6 md:right-24 pointer-events-none select-none z-0">
+      <div class="hidden md:block absolute bottom-6 right-6 md:right-24 pointer-events-none select-none z-0">
         <img src="/assets/images/figma_1_400.svg" alt="" class="w-16 h-16 md:w-24 md:h-24 object-contain" />
       </div>
 
@@ -84,21 +84,20 @@
       </div>
     </section>
 
-    <!-- BOTTOM CTA BANNER -->
-    <section class="py-20 bg-white border-t border-[#EAE8E3] text-center">
-      <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+    <!-- COURSE RECOMMENDATION QUIZ SECTION -->
+    <section id="course-quiz-section" class="py-16 md:py-24 bg-white border-t border-[#EAE8E3]">
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center space-y-4 mb-10">
+        <span class="text-xs font-bold uppercase tracking-wider text-[#9B7641]">Personalized Path Finder</span>
         <h2 class="text-3xl sm:text-4xl font-extrabold text-[#111624] tracking-tight">
-          Not Sure Which Course to Pick?
+          Find the Right Course for You
         </h2>
         <p class="text-sm sm:text-base text-gray-600 max-w-xl mx-auto leading-relaxed">
-          Reach out to our team and we'll help you find the right learning path based on your goals and background.
+          Answer 5 quick questions about your goals, experience, and interests to get a tailored course recommendation.
         </p>
-        <div class="pt-2">
-          <a href="contact.html" 
-             class="inline-flex items-center justify-center px-8 py-3.5 rounded-full bg-[#111624] hover:bg-[#232938] text-white text-sm font-medium shadow-md hover:shadow-lg transition-all">
-            Get in Touch
-          </a>
-        </div>
+      </div>
+
+      <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div id="course-quiz-container"></div>
       </div>
     </section>
   </main>
@@ -114,12 +113,16 @@
     import { renderNavbar } from '/src/components/Navbar.js';
     import { renderFooter } from '/src/components/Footer.js';
     import { renderRegistrationModal } from '/src/components/RegistrationModal.js';
+    import { initCourseQuiz } from '/src/components/CourseQuiz.js';
     import { courses } from '/src/data/courses.js';
     import '/src/scripts/main.js';
 
     document.getElementById('navbar-placeholder').innerHTML = renderNavbar('courses');
     document.getElementById('footer-placeholder').innerHTML = renderFooter();
     document.getElementById('modal-placeholder').innerHTML = renderRegistrationModal();
+
+    // Initialize Course Quiz
+    initCourseQuiz('course-quiz-container');
 
     const grid = document.getElementById('courses-full-grid');
     const filterBtns = document.querySelectorAll('.filter-btn');
@@ -156,16 +159,8 @@
             </div>
           </div>
 
-          <!-- Bottom Row with Duration and Register CTA -->
-          <div class="px-5 pb-5 pt-3 border-t border-gray-100 flex items-center justify-between text-xs">
-            <div class="flex items-center gap-1.5 text-gray-500 font-medium">
-              <svg class="w-3.5 h-3.5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="10" stroke-width="2"/>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6l4 2"/>
-              </svg>
-              <span>${c.duration}</span>
-            </div>
-
+          <!-- Bottom Row with Register CTA -->
+          <div class="px-5 pb-5 pt-3 border-t border-gray-100 flex items-center justify-end text-xs">
             <a href="course-detail.html?id=${c.id}" class="inline-flex items-center gap-1.5 font-bold text-[#111624] hover:text-[#9B7641] transition-colors">
               <span>Register Now</span>
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

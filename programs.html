@@ -19,22 +19,22 @@
       
       <!-- Decorative Floating Shapes -->
       <!-- Pink Flower (Top Left) -->
-      <div class="absolute top-8 left-6 md:left-20 pointer-events-none select-none z-0">
+      <div class="hidden md:block absolute top-8 left-6 md:left-20 pointer-events-none select-none z-0">
         <img src="/assets/images/shape-pink-flower.png" alt="" class="w-16 h-16 md:w-24 md:h-24 object-contain" />
       </div>
 
       <!-- Purple Teardrop (Bottom Left) -->
-      <div class="absolute bottom-10 left-8 md:left-28 pointer-events-none select-none z-0">
+      <div class="hidden md:block absolute bottom-10 left-8 md:left-28 pointer-events-none select-none z-0">
         <img src="/assets/images/shape-purple-drop.png" alt="" class="w-14 h-14 md:w-20 md:h-20 object-contain" />
       </div>
 
       <!-- Yellow Split Shape (Top Right) -->
-      <div class="absolute top-10 right-8 md:right-24 pointer-events-none select-none z-0">
+      <div class="hidden md:block absolute top-10 right-8 md:right-24 pointer-events-none select-none z-0">
         <img src="/assets/images/shape-yellow-split.png" alt="" class="w-16 h-16 md:w-24 md:h-24 object-contain" />
       </div>
 
       <!-- Blue Flower (Bottom Right) -->
-      <div class="absolute bottom-8 right-6 md:right-20 pointer-events-none select-none z-0">
+      <div class="hidden md:block absolute bottom-8 right-6 md:right-20 pointer-events-none select-none z-0">
         <img src="/assets/images/shape-blue-flower.png" alt="" class="w-16 h-16 md:w-24 md:h-24 object-contain" />
       </div>
 
@@ -90,7 +90,7 @@
               </a>
               <button data-action="register" data-course-id="100days" data-course-title="100 Days Tech Challenge"
                       class="px-7 py-4 rounded-full bg-[#9B7641] hover:bg-[#856333] text-white text-sm font-semibold transition-all shadow-md hover:shadow-lg">
-                <span>Join Waitlist</span>
+                <span>Join the Waitlist</span>
               </button>
             </div>
           </div>
@@ -164,7 +164,7 @@
                 <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full ${p.badgeClass}">
                   ${p.badge}
                 </span>
-                <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold rounded-full ${p.isActive ? 'bg-emerald-100 text-emerald-800' : 'bg-gray-100 text-gray-600'}">
+                <span class="inline-block px-2.5 py-0.5 text-[11px] font-semibold rounded-full ${p.isActive ? 'bg-emerald-100 text-emerald-800' : 'bg-amber-100 text-amber-800'}">
                   ${p.status}
                 </span>
               </div>
@@ -175,13 +175,13 @@
           </div>
 
           <!-- Bottom Footer Details (Generous spacing separating details and CTA) -->
-          <div class="px-6 sm:px-7 pb-6 pt-5 mt-auto border-t border-black/5 flex items-center justify-between text-xs">
-            <div class="space-y-1 text-gray-500 font-medium">
+          <div class="px-6 sm:px-7 pb-6 pt-5 mt-auto border-t border-black/5 flex flex-col sm:flex-row sm:items-center justify-between gap-3 text-xs">
+            <div class="space-y-1 text-gray-500 font-medium leading-relaxed">
               <p class="text-[#111624] font-semibold">${p.details ? p.details.duration : p.duration}</p>
-              <p>${p.participants || (p.details ? p.details.participation : '')}</p>
+              <p class="text-xs text-gray-600">${p.participants || (p.details ? p.details.participation : '')}</p>
             </div>
 
-            <a href="program-detail.html?id=${p.id}" class="inline-flex items-center gap-1.5 font-bold text-[#111624] hover:text-[#9B7641] transition-colors py-1 px-1">
+            <a href="program-detail.html?id=${p.id}" class="inline-flex items-center gap-1.5 font-bold text-[#111624] hover:text-[#9B7641] transition-colors py-1 shrink-0 self-start sm:self-auto">
               <span>Learn more</span>
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"/>

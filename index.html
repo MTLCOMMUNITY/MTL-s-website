@@ -19,12 +19,12 @@
       
       <!-- Decorative Floating Shapes (Large & Prominent) -->
       <!-- Green 4-point star (Top Left) -->
-      <div class="absolute top-10 left-6 md:left-16 pointer-events-none select-none z-10">
+      <div class="hidden md:block absolute top-10 left-6 md:left-16 pointer-events-none select-none z-10">
         <img src="/assets/images/figma_1_136.svg" alt="Decorative star" class="w-16 h-16 md:w-24 md:h-24 object-contain" />
       </div>
 
       <!-- Yellow asterisk (Top Right) -->
-      <div class="absolute top-8 right-8 md:right-1/4 pointer-events-none select-none z-10">
+      <div class="hidden md:block absolute top-8 right-8 md:right-1/4 pointer-events-none select-none z-10">
         <img src="/assets/images/figma_1_134.svg" alt="Decorative asterisk" class="w-20 h-20 md:w-28 md:h-28 object-contain" />
       </div>
 
@@ -44,19 +44,19 @@
             </p>
 
             <!-- CTA Buttons -->
-            <div class="flex flex-wrap items-center gap-4 pt-2">
+            <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 sm:gap-4 pt-2 w-full sm:w-auto">
               <a href="courses.html" 
-                 class="px-7 py-4 rounded-full bg-[#EFEFEA] hover:bg-[#E5E5DF] text-[#111624] text-sm sm:text-base font-semibold border border-[#E0DED7] transition-all">
+                 class="px-7 py-4 rounded-full bg-[#EFEFEA] hover:bg-[#E5E5DF] text-[#111624] text-sm sm:text-base font-semibold border border-[#E0DED7] transition-all text-center justify-center">
                 Register for a course
               </a>
               <a href="contact.html?modal=login" 
-                 class="px-8 py-4 rounded-full bg-[#111624] hover:bg-[#232938] text-white text-sm sm:text-base font-semibold transition-all shadow-sm hover:shadow">
+                 class="px-8 py-4 rounded-full bg-[#111624] hover:bg-[#232938] text-white text-sm sm:text-base font-semibold transition-all shadow-sm hover:shadow text-center justify-center">
                 Login to portal
               </a>
             </div>
 
             <!-- Blue Hand-drawn Star Doodle -->
-            <div class="pt-2 pl-12 pointer-events-none select-none">
+            <div class="hidden md:block pt-2 pl-12 pointer-events-none select-none">
               <img src="/assets/images/figma_1_138.svg" alt="Star doodle" class="w-14 h-14 md:w-20 md:h-20 object-contain" />
             </div>
           </div>
@@ -233,8 +233,7 @@
             </div>
           </div>
 
-          <div class="px-5 pb-5 pt-3 border-t border-gray-100 flex items-center justify-between text-xs">
-            <span class="text-gray-400 font-medium">${c.duration}</span>
+          <div class="px-5 pb-5 pt-3 border-t border-gray-100 flex items-center justify-end text-xs">
             <a href="course-detail.html?id=${c.id}" class="inline-flex items-center gap-1.5 font-bold text-[#111624] hover:text-[#9B7641] transition-colors">
               <span>Register Now</span>
               <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">

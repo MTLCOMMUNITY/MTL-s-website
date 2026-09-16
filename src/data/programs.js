@@ -8,9 +8,9 @@ export const programs = [
     cardBg: 'bg-[#FEF3D6]',
     heroBg: 'bg-[#FEF3D6]',
     isFeaturedCard: true,
-    status: 'Currently Active',
-    isActive: true,
-    ctaText: 'Join Waitlist',
+    status: 'Waitlist Open',
+    isActive: false,
+    ctaText: 'Join the Waitlist',
     description: 'Commit to 100 consecutive days of learning and building. A structured daily challenge spanning coding, design, cybersecurity, and more with community accountability built in.',
     about: 'The 100 Days Tech Challenge is MoonTechLife flagship community initiative. Designed to help aspiring and transitioning tech professionals build unbroken consistency, practical skills, and portfolio projects through 100 consecutive days of focused building and community accountability.',
     whatToExpect: [
