@@ -66,7 +66,10 @@
             <img src="/assets/images/hero-students-transparent.png" 
                  alt="MoonTechLife learners collaborating happily on a laptop" 
                  class="w-full max-w-none h-auto lg:w-[720px] lg:h-[800px] object-contain object-right-bottom block" 
-                 loading="eager" />
+                 width="720"
+                 height="800"
+                 loading="eager"
+                 fetchpriority="high" />
           </div>
 
         </div>
@@ -223,7 +226,7 @@
           <div>
             <!-- Pastel Top Block: Single solid pastel colour filling top portion directly -->
             <div class="${c.bgPastel} h-44 w-full flex items-center justify-center p-4">
-              <img src="${c.image}" alt="${c.title}" class="max-h-36 max-w-full object-contain hover:scale-105 transition-transform" />
+              <img src="${c.image}" alt="${c.title}" class="max-h-36 max-w-full object-contain hover:scale-105 transition-transform" loading="lazy" />
             </div>
 
             <!-- Card Body -->

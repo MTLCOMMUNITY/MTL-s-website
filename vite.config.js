@@ -15,6 +15,8 @@ export default defineConfig({
         programDetail: resolve(__dirname, 'program-detail.html'),
         about: resolve(__dirname, 'about.html'),
         contact: resolve(__dirname, 'contact.html'),
+        privacy: resolve(__dirname, 'privacy.html'),
+        terms: resolve(__dirname, 'terms.html'),
       },
     },
   },
