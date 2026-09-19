@@ -1,7 +1,7 @@
 import { courses } from '../data/courses.js';
 
 export function renderRegistrationModal() {
-  const courseOptions = courses.map(c => `<option value="${c.id}">${c.title} (${c.duration})</option>`).join('');
+  const courseOptions = courses.map(c => `<option value="${c.id}">${c.title}</option>`).join('');
 
   return `
     <div id="registration-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
