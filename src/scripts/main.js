@@ -14,26 +14,26 @@ export function initGlobal() {
   // Init Modal
   initRegistrationModal();
 
-  // Attach all CTA buttons with data-action="register"
-  document.querySelectorAll('[data-action="register"]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+  // Delegate clicks for all CTA buttons/links with data-action="register" or data-action="join-telegram"
+  document.addEventListener('click', (e) => {
+    const registerBtn = e.target.closest('[data-action="register"]');
+    if (registerBtn) {
       e.preventDefault();
-      const courseId = btn.getAttribute('data-course-id') || null;
-      const courseTitle = btn.getAttribute('data-course-title') || null;
+      const courseId = registerBtn.getAttribute('data-course-id') || null;
+      const courseTitle = registerBtn.getAttribute('data-course-title') || null;
       if (window.openRegistrationModal) {
         window.openRegistrationModal(courseId, courseTitle);
       }
-    });
-  });
+      return;
+    }
 
-  // Attach all CTA buttons/links with data-action="join-telegram"
-  document.querySelectorAll('[data-action="join-telegram"]').forEach(btn => {
-    btn.addEventListener('click', (e) => {
+    const telegramBtn = e.target.closest('[data-action="join-telegram"]');
+    if (telegramBtn) {
       e.preventDefault();
       if (window.openTelegramModal) {
         window.openTelegramModal();
       }
-    });
+    }
   });
 }
 
