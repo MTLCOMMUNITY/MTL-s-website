@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MoonTechLife - Social Media Video Showcase Generator</title>
+  <link rel="icon" type="image/png" href="/favicon.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500&display=swap');
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+  </style>
+</head>
+<body class="bg-[#090C14] text-white min-h-screen flex flex-col items-center justify-between p-3 sm:p-6 selection:bg-[#9B7641] selection:text-white">
+
+  <!-- Studio Header & Action Controls -->
+  <header class="w-full max-w-5xl flex flex-col md:flex-row items-center justify-between gap-4 py-3.5 px-6 bg-[#121622]/90 backdrop-blur-md rounded-2xl border border-white/10 shadow-xl mb-4">
+    <div class="flex items-center gap-3">
+      <img src="/assets/images/logo-footer.png" alt="MoonTechLife" class="h-6 w-auto object-contain" />
+      <span class="text-xs px-2.5 py-1 rounded-full bg-[#9B7641]/20 text-[#E5C799] font-semibold border border-[#9B7641]/30">
+        Social Media Video Studio
+      </span>
+    </div>
+
+    <!-- Format Toggles & Record Action -->
+    <div class="flex flex-wrap items-center justify-center gap-3">
+      <!-- Aspect Ratio Switcher -->
+      <div class="flex items-center bg-[#0B0E17] rounded-full p-1 border border-white/10 text-xs font-medium">
+        <button id="btn-landscape" class="px-3.5 py-1.5 rounded-full bg-[#22283A] text-white transition-all">
+          16:9 (Landscape)
+        </button>
+        <button id="btn-square" class="px-3.5 py-1.5 rounded-full text-gray-400 hover:text-white transition-all">
+          1:1 (Square Feed)
+        </button>
+        <button id="btn-portrait" class="px-3.5 py-1.5 rounded-full text-gray-400 hover:text-white transition-all">
+          9:16 (Reels/TikTok)
+        </button>
+      </div>
+
+      <!-- Action Button -->
+      <button id="record-btn" class="px-6 py-2.5 rounded-full bg-[#9B7641] hover:bg-[#856333] text-white text-xs font-bold transition-all shadow-lg hover:shadow-xl flex items-center gap-2 cursor-pointer active:scale-95">
+        <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse" id="record-indicator"></span>
+        <span id="record-btn-text">Record 12s Video (.mp4)</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Canvas Stage Viewport -->
+  <main class="w-full flex-1 flex flex-col items-center justify-center max-w-5xl">
+    <div class="relative rounded-2xl overflow-hidden border border-white/15 shadow-2xl bg-black max-w-full flex items-center justify-center">
+      <canvas id="showcase-canvas" width="1920" height="1080" class="max-w-full max-h-[72vh] w-auto h-auto block rounded-2xl"></canvas>
+      
+      <!-- Live Recording Overlay Indicator -->
+      <div id="recording-overlay" class="hidden absolute top-4 right-4 z-40 bg-black/80 backdrop-blur-md px-4 py-2 rounded-full border border-red-500/40 flex items-center gap-2.5 text-xs text-white">
+        <span class="w-2.5 h-2.5 rounded-full bg-red-500 animate-ping"></span>
+        <span class="font-mono" id="recording-timer">REC 00:00</span>
+      </div>
+    </div>
+  </main>
+
+  <!-- Helper Footer -->
+  <footer class="w-full max-w-5xl mt-4 text-center text-xs text-gray-400 space-y-1">
+    <p>📱 Live synchronized scrolling of MoonTechLife on both <strong>MacBook</strong> and <strong>iPhone</strong>.</p>
+    <p class="text-gray-500">Click <strong>Record 12s Video</strong> to automatically generate and download the HD video file ready to post on social media.</p>
+  </footer>
+
+  <!-- Hidden Source Assets for Canvas Rendering -->
+  <div class="hidden">
+    <img id="img-desktop" src="/assets/showcase/desktop-scroll.png" alt="" />
+    <img id="img-mobile" src="/assets/showcase/mobile-scroll.png" alt="" />
+    <img id="img-logo" src="/assets/images/logo-footer.png" alt="" />
+  </div>
+
+  <script>
+    const canvas = document.getElementById('showcase-canvas');
+    const ctx = canvas.getContext('2d');
+
+    const imgDesktop = document.getElementById('img-desktop');
+    const imgMobile = document.getElementById('img-mobile');
+    const imgLogo = document.getElementById('img-logo');
+
+    const btnLandscape = document.getElementById('btn-landscape');
+    const btnSquare = document.getElementById('btn-square');
+    const btnPortrait = document.getElementById('btn-portrait');
+
+    const recordBtn = document.getElementById('record-btn');
+    const recordBtnText = document.getElementById('record-btn-text');
+    const recordIndicator = document.getElementById('record-indicator');
+    const recordingOverlay = document.getElementById('recording-overlay');
+    const recordingTimer = document.getElementById('recording-timer');
+
+    let currentFormat = 'landscape'; // 'landscape', 'square', 'portrait'
+    const DURATION = 12000; // 12 seconds animation loop
+
+    function updateFormat(format) {
+      currentFormat = format;
+      btnLandscape.className = 'px-3.5 py-1.5 rounded-full text-gray-400 hover:text-white transition-all';
+      btnSquare.className = 'px-3.5 py-1.5 rounded-full text-gray-400 hover:text-white transition-all';
+      btnPortrait.className = 'px-3.5 py-1.5 rounded-full text-gray-400 hover:text-white transition-all';
+
+      if (format === 'landscape') {
+        btnLandscape.className = 'px-3.5 py-1.5 rounded-full bg-[#22283A] text-white transition-all';
+        canvas.width = 1920;
+        canvas.height = 1080;
+      } else if (format === 'square') {
+        btnSquare.className = 'px-3.5 py-1.5 rounded-full bg-[#22283A] text-white transition-all';
+        canvas.width = 1080;
+        canvas.height = 1080;
+      } else if (format === 'portrait') {
+        btnPortrait.className = 'px-3.5 py-1.5 rounded-full bg-[#22283A] text-white transition-all';
+        canvas.width = 1080;
+        canvas.height = 1920;
+      }
+    }
+
+    btnLandscape.addEventListener('click', () => updateFormat('landscape'));
+    btnSquare.addEventListener('click', () => updateFormat('square'));
+    btnPortrait.addEventListener('click', () => updateFormat('portrait'));
+
+    // Round rectangle helper
+    function roundRect(ctx, x, y, width, height, radius) {
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.lineTo(x + width - radius, y);
+      ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+      ctx.lineTo(x + width, y + height - radius);
+      ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+      ctx.lineTo(x + radius, y + height);
+      ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+      ctx.lineTo(x, y + radius);
+      ctx.quadraticCurveTo(x, y, x + radius, y);
+      ctx.closePath();
+    }
+
+    // Main Draw Frame Routine
+    function drawFrame(scrollFactor) {
+      const W = canvas.width;
+      const H = canvas.height;
+
+      // 1. Background Gradient & Glow
+      const bgGrad = ctx.createLinearGradient(0, 0, W, H);
+      bgGrad.addColorStop(0, '#0C0F19');
+      bgGrad.addColorStop(0.5, '#080A10');
+      bgGrad.addColorStop(1, '#05070B');
+      ctx.fillStyle = bgGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Gold Ambient Glow
+      const glowGrad = ctx.createRadialGradient(W * 0.4, H * 0.3, 50, W * 0.4, H * 0.3, W * 0.7);
+      glowGrad.addColorStop(0, 'rgba(155, 118, 65, 0.18)');
+      glowGrad.addColorStop(1, 'rgba(155, 118, 65, 0)');
+      ctx.fillStyle = glowGrad;
+      ctx.fillRect(0, 0, W, H);
+
+      // Blue Ambient Glow
+      const blueGlow = ctx.createRadialGradient(W * 0.8, H * 0.8, 50, W * 0.8, H * 0.8, W * 0.6);
+      blueGlow.addColorStop(0, 'rgba(37, 99, 235, 0.12)');
+      blueGlow.addColorStop(1, 'rgba(37, 99, 235, 0)');
+      ctx.fillStyle = blueGlow;
+      ctx.fillRect(0, 0, W, H);
+
+      // Subtle Grid / Topo Pattern
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.03)';
+      ctx.lineWidth = 1;
+      const step = 80;
+      for (let x = 0; x < W; x += step) {
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, H);
+        ctx.stroke();
+      }
+      for (let y = 0; y < H; y += step) {
+        ctx.beginPath();
+        ctx.moveTo(0, y);
+        ctx.lineTo(W, y);
+        ctx.stroke();
+      }
+
+      // 2. Top Branding Header
+      if (imgLogo.complete && imgLogo.naturalWidth > 0) {
+        const logoH = currentFormat === 'portrait' ? 44 : 36;
+        const logoW = (imgLogo.naturalWidth / imgLogo.naturalHeight) * logoH;
+        ctx.drawImage(imgLogo, 60, 50, logoW, logoH);
+      }
+
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.65)';
+      ctx.font = '600 16px "Plus Jakarta Sans", sans-serif';
+      ctx.fillText('Official Website Experience', currentFormat === 'portrait' ? 60 : 340, currentFormat === 'portrait' ? 125 : 74);
+
+      // 3. Floating Feature Badges
+      const badges = ['✨ Community First', '💻 100 Days Challenge', '🚀 Responsive Across All Devices'];
+      let badgeX = 60;
+      const badgeY = H - 60;
+      ctx.font = '600 14px "Plus Jakarta Sans", sans-serif';
+      badges.forEach(b => {
+        const tw = ctx.measureText(b).width;
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.08)';
+        roundRect(ctx, badgeX, badgeY - 22, tw + 24, 32, 16);
+        ctx.fill();
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.12)';
+        ctx.stroke();
+
+        ctx.fillStyle = '#E5E7EB';
+        ctx.fillText(b, badgeX + 12, badgeY);
+        badgeX += tw + 36;
+      });
+
+      // 4. Render Devices depending on format
+      if (currentFormat === 'landscape') {
+        // Desktop Laptop on left / center, Mobile iPhone on right overlapping
+        const dtW = 1050;
+        const dtH = 650;
+        const dtX = 140;
+        const dtY = 170;
+        drawLaptop(dtX, dtY, dtW, dtH, scrollFactor);
+
+        const mbW = 340;
+        const mbH = 680;
+        const mbX = dtX + dtW - 130;
+        const mbY = dtY + 30;
+        drawPhone(mbX, mbY, mbW, mbH, scrollFactor);
+      } else if (currentFormat === 'square') {
+        // Scaled side-by-side
+        const dtW = 700;
+        const dtH = 440;
+        const dtX = 80;
+        const dtY = 240;
+        drawLaptop(dtX, dtY, dtW, dtH, scrollFactor);
+
+        const mbW = 280;
+        const mbH = 560;
+        const mbX = dtX + dtW - 100;
+        const mbY = dtY + 120;
+        drawPhone(mbX, mbY, mbW, mbH, scrollFactor);
+      } else if (currentFormat === 'portrait') {
+        // Vertical stacked layout: Laptop above, Phone hero below
+        const dtW = 860;
+        const dtH = 530;
+        const dtX = (W - dtW) / 2;
+        const dtY = 240;
+        drawLaptop(dtX, dtY, dtW, dtH, scrollFactor);
+
+        const mbW = 480;
+        const mbH = 960;
+        const mbX = (W - mbW) / 2;
+        const mbY = 820;
+        drawPhone(mbX, mbY, mbW, mbH, scrollFactor);
+      }
+    }
+
+    // Draw Laptop Mockup
+    function drawLaptop(x, y, w, h, scrollFactor) {
+      // Drop Shadow
+      ctx.save();
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.75)';
+      ctx.shadowBlur = 45;
+      ctx.shadowOffsetY = 25;
+
+      // Outer Bezel
+      ctx.fillStyle = '#1D212B';
+      roundRect(ctx, x, y, w, h, 20);
+      ctx.fill();
+      ctx.restore();
+
+      // Outer Bezel Border
+      ctx.strokeStyle = '#323746';
+      ctx.lineWidth = 2.5;
+      roundRect(ctx, x, y, w, h, 20);
+      ctx.stroke();
+
+      // Screen Header Bar
+      const headerH = 34;
+      ctx.fillStyle = '#141720';
+      ctx.beginPath();
+      ctx.moveTo(x + 20, y);
+      ctx.lineTo(x + w - 20, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + 20);
+      ctx.lineTo(x + w, y + headerH);
+      ctx.lineTo(x, y + headerH);
+      ctx.lineTo(x, y + 20);
+      ctx.quadraticCurveTo(x, y, x + 20, y);
+      ctx.closePath();
+      ctx.fill();
+
+      // Window Dots
+      ctx.fillStyle = '#EF4444';
+      ctx.beginPath(); ctx.arc(x + 24, y + 17, 4.5, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#F59E0B';
+      ctx.beginPath(); ctx.arc(x + 38, y + 17, 4.5, 0, Math.PI * 2); ctx.fill();
+      ctx.fillStyle = '#10B981';
+      ctx.beginPath(); ctx.arc(x + 52, y + 17, 4.5, 0, Math.PI * 2); ctx.fill();
+
+      // URL Pill
+      const pillW = 200;
+      ctx.fillStyle = 'rgba(0, 0, 0, 0.4)';
+      roundRect(ctx, x + (w - pillW) / 2, y + 8, pillW, 18, 9);
+      ctx.fill();
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.7)';
+      ctx.font = '500 10px monospace';
+      ctx.textAlign = 'center';
+      ctx.fillText('🔒 moontechlife.com', x + w / 2, y + 21);
+      ctx.textAlign = 'left';
+
+      // Inner Screen Viewport
+      const screenX = x + 4;
+      const screenY = y + headerH;
+      const screenW = w - 8;
+      const screenH = h - headerH - 4;
+
+      ctx.save();
+      roundRect(ctx, screenX, screenY, screenW, screenH, 8);
+      ctx.clip();
+
+      if (imgDesktop.complete && imgDesktop.naturalWidth > 0) {
+        const imgH = imgDesktop.naturalHeight;
+        const imgW = imgDesktop.naturalWidth;
+        const visibleH = (screenH / screenW) * imgW;
+        const maxScroll = Math.max(0, imgH - visibleH);
+        const sy = scrollFactor * maxScroll;
+        ctx.drawImage(imgDesktop, 0, sy, imgW, visibleH, screenX, screenY, screenW, screenH);
+      } else {
+        ctx.fillStyle = '#FAFAFA';
+        ctx.fillRect(screenX, screenY, screenW, screenH);
+      }
+      ctx.restore();
+
+      // Laptop Bottom Stand Lip
+      const standW = w * 1.08;
+      const standH = 14;
+      const standX = x - (standW - w) / 2;
+      const standY = y + h;
+
+      ctx.save();
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.5)';
+      ctx.shadowBlur = 18;
+      ctx.shadowOffsetY = 10;
+      ctx.fillStyle = '#2A2E3B';
+      roundRect(ctx, standX, standY, standW, standH, 7);
+      ctx.fill();
+      ctx.restore();
+
+      ctx.strokeStyle = '#444A5C';
+      ctx.lineWidth = 1;
+      roundRect(ctx, standX, standY, standW, standH, 7);
+      ctx.stroke();
+
+      // Stand Notch
+      ctx.fillStyle = '#171A22';
+      roundRect(ctx, x + w / 2 - 35, standY, 70, 4, 2);
+      ctx.fill();
+    }
+
+    // Draw Phone Mockup
+    function drawPhone(x, y, w, h, scrollFactor) {
+      // Drop Shadow
+      ctx.save();
+      ctx.shadowColor = 'rgba(0, 0, 0, 0.85)';
+      ctx.shadowBlur = 45;
+      ctx.shadowOffsetY = 25;
+
+      // Outer Bezel Frame
+      ctx.fillStyle = '#161922';
+      roundRect(ctx, x, y, w, h, 48);
+      ctx.fill();
+      ctx.restore();
+
+      // Titanium Edge Stroke
+      ctx.strokeStyle = '#3C4252';
+      ctx.lineWidth = 4;
+      roundRect(ctx, x, y, w, h, 48);
+      ctx.stroke();
+
+      // Screen Inside
+      const screenInset = 8;
+      const screenX = x + screenInset;
+      const screenY = y + screenInset;
+      const screenW = w - screenInset * 2;
+      const screenH = h - screenInset * 2;
+
+      ctx.save();
+      roundRect(ctx, screenX, screenY, screenW, screenH, 42);
+      ctx.clip();
+
+      if (imgMobile.complete && imgMobile.naturalWidth > 0) {
+        const imgH = imgMobile.naturalHeight;
+        const imgW = imgMobile.naturalWidth;
+        const visibleH = (screenH / screenW) * imgW;
+        const maxScroll = Math.max(0, imgH - visibleH);
+        const sy = scrollFactor * maxScroll;
+        ctx.drawImage(imgMobile, 0, sy, imgW, visibleH, screenX, screenY, screenW, screenH);
+      } else {
+        ctx.fillStyle = '#FAFAFA';
+        ctx.fillRect(screenX, screenY, screenW, screenH);
+      }
+
+      ctx.restore();
+
+      // Dynamic Island Notch
+      const islandW = w * 0.35;
+      const islandH = 22;
+      const islandX = x + (w - islandW) / 2;
+      const islandY = y + 16;
+      ctx.fillStyle = '#000000';
+      roundRect(ctx, islandX, islandY, islandW, islandH, 11);
+      ctx.fill();
+
+      // Small Camera Lens
+      ctx.fillStyle = '#1D253A';
+      ctx.beginPath();
+      ctx.arc(islandX + islandW - 14, islandY + 11, 4, 0, Math.PI * 2);
+      ctx.fill();
+
+      // Bottom Home Indicator Bar
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.5)';
+      roundRect(ctx, x + w / 2 - 38, y + h - 16, 76, 4, 2);
+      ctx.fill();
+    }
+
+    // Animation Loop
+    let startTimestamp = null;
+    let recordingMediaRecorder = null;
+    let recordedChunks = [];
+    let isRecording = false;
+
+    function renderLoop(time) {
+      if (!startTimestamp) startTimestamp = time;
+      const progress = ((time - startTimestamp) % DURATION) / DURATION;
+
+      // Smooth scroll curve: 0 -> 1 -> 0
+      let scrollFactor;
+      if (progress < 0.45) {
+        const t = progress / 0.45;
+        scrollFactor = 0.5 - 0.5 * Math.cos(t * Math.PI);
+      } else if (progress < 0.55) {
+        scrollFactor = 1;
+      } else if (progress < 0.95) {
+        const t = (progress - 0.55) / 0.40;
+        scrollFactor = 1 - (0.5 - 0.5 * Math.cos(t * Math.PI));
+      } else {
+        scrollFactor = 0;
+      }
+
+      drawFrame(scrollFactor);
+      requestAnimationFrame(renderLoop);
+    }
+    requestAnimationFrame(renderLoop);
+
+    // Record Action
+    recordBtn.addEventListener('click', () => {
+      if (isRecording) return;
+      isRecording = true;
+      recordBtn.disabled = true;
+      recordedChunks = [];
+
+      startTimestamp = performance.now(); // reset cycle to top
+
+      // Capture canvas stream at 60 FPS
+      const stream = canvas.captureStream(60);
+      const mimeType = MediaRecorder.isTypeSupported('video/mp4;codecs=avc1')
+        ? 'video/mp4;codecs=avc1'
+        : (MediaRecorder.isTypeSupported('video/webm;codecs=vp9') ? 'video/webm;codecs=vp9' : 'video/webm');
+
+      recordingMediaRecorder = new MediaRecorder(stream, {
+        mimeType,
+        videoBitsPerSecond: 12000000 // 12 Mbps crystal clear
+      });
+
+      recordingMediaRecorder.ondataavailable = (e) => {
+        if (e.data.size > 0) recordedChunks.push(e.data);
+      };
+
+      recordingMediaRecorder.onstop = () => {
+        const blob = new Blob(recordedChunks, { type: mimeType });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        const ext = mimeType.includes('mp4') ? 'mp4' : 'webm';
+        a.href = url;
+        a.download = `moontechlife-showcase-${currentFormat}.${ext}`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+
+        isRecording = false;
+        recordBtn.disabled = false;
+        recordBtnText.textContent = `Record 12s Video (.${ext})`;
+        recordIndicator.className = 'w-2.5 h-2.5 rounded-full bg-red-500 animate-pulse';
+        recordingOverlay.classList.add('hidden');
+      };
+
+      recordingMediaRecorder.start();
+      recordingOverlay.classList.remove('hidden');
+      recordIndicator.className = 'w-2.5 h-2.5 rounded-full bg-red-500 animate-ping';
+
+      const recordStartTime = Date.now();
+      const interval = setInterval(() => {
+        const sec = Math.floor((Date.now() - recordStartTime) / 1000);
+        recordingTimer.textContent = `REC 00:${sec.toString().padStart(2, '0')}`;
+        recordBtnText.textContent = `Recording (${12 - sec}s)...`;
+
+        if (sec >= 12) {
+          clearInterval(interval);
+          recordingMediaRecorder.stop();
+        }
+      }, 500);
+    });
+  </script>
+</body>
+</html>
