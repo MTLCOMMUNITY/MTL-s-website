@@ -25,6 +25,16 @@ export function initGlobal() {
       }
     });
   });
+
+  // Attach all CTA buttons/links with data-action="join-telegram"
+  document.querySelectorAll('[data-action="join-telegram"]').forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (window.openTelegramModal) {
+        window.openTelegramModal();
+      }
+    });
+  });
 }
 
 document.addEventListener('DOMContentLoaded', initGlobal);

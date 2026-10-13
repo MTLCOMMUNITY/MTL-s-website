@@ -80,8 +80,76 @@ export function renderRegistrationModal() {
 
       </div>
     </div>
+
+    <!-- Telegram Community Email Capture Modal -->
+    <div id="telegram-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm transition-opacity">
+      <div class="relative w-full max-w-md bg-white rounded-3xl shadow-2xl p-6 sm:p-8 overflow-hidden border border-gray-100 transform transition-transform scale-95 duration-200">
+        
+        <!-- Close Button -->
+        <button id="close-telegram-modal-btn" type="button" class="absolute top-5 right-5 text-gray-400 hover:text-gray-700 p-2 rounded-full hover:bg-gray-100 transition-colors">
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+          </svg>
+        </button>
+
+        <div id="telegram-form-view">
+          <div class="mb-6">
+            <span class="inline-block px-3 py-1 text-xs font-semibold rounded-full bg-[#FEF3D6] text-[#946300] mb-2">MoonTechLife Community</span>
+            <h3 class="text-2xl font-bold text-[#111624]">Join Our Telegram Community</h3>
+            <p class="text-sm text-gray-500 mt-1 leading-relaxed">
+              Enter your email address to receive community updates, learning resources, and instant access to our official Telegram channel.
+            </p>
+          </div>
+
+          <form id="telegram-community-form" class="space-y-4">
+            <div>
+              <label for="telegram-email" class="block text-xs font-semibold text-gray-700 uppercase tracking-wider mb-1.5">Email Address</label>
+              <input type="email" id="telegram-email" name="email" required placeholder="you@example.com" 
+                     class="w-full px-4 py-3.5 rounded-2xl bg-white border border-gray-200 text-sm focus:outline-none focus:ring-2 focus:ring-[#9B7641]/40 focus:border-[#9B7641]">
+            </div>
+
+            <div class="pt-2">
+              <button type="submit" id="telegram-submit-btn"
+                      class="w-full py-3.5 px-6 rounded-full bg-[#111624] hover:bg-[#232938] text-white font-medium text-sm transition-all shadow-md hover:shadow-lg flex items-center justify-center gap-2">
+                <span>Continue to Telegram</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+                </svg>
+              </button>
+            </div>
+            <p class="text-[11px] text-center text-gray-400">You will be directed straight to our official Telegram community channel.</p>
+          </form>
+        </div>
+
+        <!-- Telegram Success & Redirect View -->
+        <div id="telegram-success-view" class="hidden py-6 text-center space-y-4">
+          <div class="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto text-2xl">
+            ✓
+          </div>
+          <h4 class="text-2xl font-bold text-[#111624]">You're In!</h4>
+          <p class="text-sm text-gray-600 max-w-sm mx-auto leading-relaxed">
+            Thank you for joining! Opening our official Telegram community now. If your browser didn't open the tab automatically, click below:
+          </p>
+          <div class="pt-3 flex flex-col gap-2.5">
+            <a href="https://t.me/+JmmhQa3YglI3NmY8" target="_blank" rel="noopener noreferrer" id="telegram-open-link"
+               class="w-full py-3.5 px-6 rounded-full bg-[#111624] hover:bg-[#232938] text-white font-medium text-sm transition-all shadow-md flex items-center justify-center gap-2">
+              <span>Join Telegram Channel</span>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+              </svg>
+            </a>
+            <button id="telegram-done-btn" type="button" class="text-xs text-gray-500 hover:text-[#111624] py-1.5 font-medium transition-colors">
+              Close window
+            </button>
+          </div>
+        </div>
+
+      </div>
+    </div>
   `;
 }
+
+export const TELEGRAM_INVITE_URL = 'https://t.me/+JmmhQa3YglI3NmY8';
 
 export function initRegistrationModal() {
   const modal = document.getElementById('registration-modal');
@@ -93,41 +161,82 @@ export function initRegistrationModal() {
   const courseSelect = document.getElementById('reg-course');
   const modalTitle = document.getElementById('modal-title');
 
-  if (!modal) return;
+  if (modal) {
+    window.openRegistrationModal = (courseId = null, title = null) => {
+      if (courseId && courseSelect) {
+        courseSelect.value = courseId;
+      }
+      if (title && modalTitle) {
+        modalTitle.textContent = `Register for ${title}`;
+      } else if (modalTitle) {
+        modalTitle.textContent = 'Register for a Course';
+      }
+      formView.classList.remove('hidden');
+      successView.classList.add('hidden');
+      modal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+    };
 
-  window.openRegistrationModal = (courseId = null, title = null) => {
-    if (courseId && courseSelect) {
-      courseSelect.value = courseId;
-    }
-    if (title && modalTitle) {
-      modalTitle.textContent = `Register for ${title}`;
-    } else if (modalTitle) {
-      modalTitle.textContent = 'Register for a Course';
-    }
-    formView.classList.remove('hidden');
-    successView.classList.add('hidden');
-    modal.classList.remove('hidden');
-    document.body.style.overflow = 'hidden';
-  };
+    const closeModal = () => {
+      modal.classList.add('hidden');
+      document.body.style.overflow = '';
+    };
 
-  const closeModal = () => {
-    modal.classList.add('hidden');
-    document.body.style.overflow = '';
-  };
-
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
-  if (doneBtn) doneBtn.addEventListener('click', closeModal);
-  
-  modal.addEventListener('click', (e) => {
-    if (e.target === modal) closeModal();
-  });
-
-  if (form) {
-    form.addEventListener('submit', (e) => {
-      e.preventDefault();
-      formView.classList.add('hidden');
-      successView.classList.remove('hidden');
-      form.reset();
+    if (closeBtn) closeBtn.addEventListener('click', closeModal);
+    if (doneBtn) doneBtn.addEventListener('click', closeModal);
+    
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) closeModal();
     });
+
+    if (form) {
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        formView.classList.add('hidden');
+        successView.classList.remove('hidden');
+        form.reset();
+      });
+    }
+  }
+
+  // Telegram Community Modal Logic
+  const tgModal = document.getElementById('telegram-modal');
+  const closeTgBtn = document.getElementById('close-telegram-modal-btn');
+  const doneTgBtn = document.getElementById('telegram-done-btn');
+  const tgForm = document.getElementById('telegram-community-form');
+  const tgFormView = document.getElementById('telegram-form-view');
+  const tgSuccessView = document.getElementById('telegram-success-view');
+
+  if (tgModal) {
+    window.openTelegramModal = () => {
+      tgFormView.classList.remove('hidden');
+      tgSuccessView.classList.add('hidden');
+      tgModal.classList.remove('hidden');
+      document.body.style.overflow = 'hidden';
+      const emailInput = document.getElementById('telegram-email');
+      if (emailInput) setTimeout(() => emailInput.focus(), 50);
+    };
+
+    const closeTgModal = () => {
+      tgModal.classList.add('hidden');
+      document.body.style.overflow = '';
+    };
+
+    if (closeTgBtn) closeTgBtn.addEventListener('click', closeTgModal);
+    if (doneTgBtn) doneTgBtn.addEventListener('click', closeTgModal);
+
+    tgModal.addEventListener('click', (e) => {
+      if (e.target === tgModal) closeTgModal();
+    });
+
+    if (tgForm) {
+      tgForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        tgFormView.classList.add('hidden');
+        tgSuccessView.classList.remove('hidden');
+        tgForm.reset();
+        window.open(TELEGRAM_INVITE_URL, '_blank', 'noopener,noreferrer');
+      });
+    }
   }
 }
